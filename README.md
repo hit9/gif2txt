@@ -12,7 +12,7 @@ DEMO
 
 HTML: http://hit9.github.io/gif2txt/out.html
 
-Requirments
+Requirements
 -----------
 
 * Jinja2
