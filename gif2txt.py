@@ -1,47 +1,73 @@
-# coding=utf8
-
+#! /usr/bin/env python3
+import argparse
 from PIL import Image
 from jinja2 import Template
 
-maxlen = 80
-filename = "test.gif"
 
-chs = "MNHQ$OC?7>!:-;. "
+def gif2txt(filename, maxLen=80, output_file='out.html'):
+    try:
+        maxLen = int(maxLen)
+    except:
+        maxLen = 80
 
-try:
-    img = Image.open(filename)
-except IOError:
-    exit("file not found: {}".format(filename))
+    chs = "MNHQ$OC?7>!:-;. "
 
-width, height = img.size
-rate = float(maxlen) / max(width, height)
-width = int(rate * width)
-height = int(rate * height)
+    try:
+        img = Image.open(filename)
+    except IOError:
+        exit("file not found: {}".format(filename))
 
-i = 0
-palette = img.getpalette()
-strings = []
+    width, height = img.size
+    rate = float(maxLen) / max(width, height)
+    width = int(rate * width)
+    height = int(rate * height)
 
-try:
-    while 1:
-        img.putpalette(palette)
-        im = Image.new('RGB', img.size)
-        im.paste(img)
-        im = im.resize((width, height))
-        string = ''
-        for h in xrange(height):
-            for w in xrange(width):
-                rgb = im.getpixel((w, h))
-                string += chs[int(sum(rgb) / 3.0 / 256.0 * 16)]
-            string += '\n'
-        i += 1
-        img.seek(img.tell() + 1)
-        strings.append(string)
-except EOFError:
-    pass
+    palette = img.getpalette()
+    strings = []
 
-with open('template.jinja') as tpl_f:
-    template = Template(tpl_f.read())
-    html = template.render(strings=strings)
+    try:
+        while 1:
+            img.putpalette(palette)
+            im = Image.new('RGB', img.size)
+            im.paste(img)
+            im = im.resize((width, height))
+            string = ''
+            for h in range(height):
+                for w in range(width):
+                    rgb = im.getpixel((w, h))
+                    string += chs[int(sum(rgb) / 3.0 / 256.0 * 16)]
+                string += '\n'
+            strings.append(string)
+            img.seek(img.tell() + 1)
+    except EOFError:
+        pass
+
+    with open('template.jinja') as tpl_f:
+        template = Template(tpl_f.read())
+        html = template.render(strings=strings)
     with open('out.html', 'w') as out_f:
         out_f.write(html)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('filename',
+                        help='Gif input file')
+    parser.add_argument('-m', '--maxLen', type=int,
+                        help='Max width of the output gif')
+    parser.add_argument('-o', '--output',
+                        help='Name of the output file')
+    args = parser.parse_args()
+
+    if not args.maxLen:
+        args.maxLen = 80
+    if not args.output:
+        args.output = 'out.html'
+
+    gif2txt(filename=args.filename,
+            maxLen=args.maxLen,
+            output_file=args.output)
+
+if __name__ == '__main__':
+    main()
