@@ -45,7 +45,7 @@ def gif2txt(filename, maxLen=80, output_file='out.html'):
     with open('template.jinja') as tpl_f:
         template = Template(tpl_f.read())
         html = template.render(strings=strings)
-    with open('out.html', 'w') as out_f:
+    with open(output_file, 'w') as out_f:
         out_f.write(html)
 
 
