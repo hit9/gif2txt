@@ -12,6 +12,13 @@ DEMO
 
 HTML: http://hit9.github.io/gif2txt/out.html
 
+USAGE
+-----
+
+```
+./gif2txt.py test.gif -m 80 -o out.html
+```
+
 Requirements
 -----------
 
