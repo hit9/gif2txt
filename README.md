@@ -10,17 +10,25 @@ DEMO
 
 ![](test.gif)
 
-HTML: http://hit9.github.io/gif2txt/out.html
+HTML: 
+
+* http://hit9.github.io/gif2txt/out.html
+* http://hit9.github.io/gif2txt/out-withcolor.html
 
 USAGE
 -----
 
 ```
-./gif2txt.py test.gif -m 80 -o out.html
+python gif2txt.py test.gif -m 80 -o out.html
+python gif2txt.py test.gif -m 80 -o out-withcolor.html -c
 ```
 
 Requirements
 -----------
 
 * Jinja2
-* PIL
+* Pillow
+
+```
+pip install -r requirements.txt
+```
