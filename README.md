@@ -13,14 +13,14 @@ DEMO
 HTML: 
 
 * http://hit9.github.io/gif2txt/out.html
-* http://hit9.github.io/gif2txt/out-withcolor.html
+* http://hit9.github.io/gif2txt/withcolor.html
 
 USAGE
 -----
 
 ```
 python gif2txt.py test.gif -m 80 -o out.html
-python gif2txt.py test.gif -m 80 -o out-withcolor.html -c
+python gif2txt.py test.gif -m 80 -o withcolor.html -c
 ```
 
 Requirements
