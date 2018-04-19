@@ -1,32 +1,29 @@
-gif2txt
+CSE 154 Gif to TXT
 =======
 
-Gif image to to Ascii Text. (Just a toy)
+Gif image to Ascii Animation for University of Washington's CSE 154 class.
 
-See also [img2txt](https://github.com/hit9/img2txt).
+Based on [gif2txt](https://github.com/hit9/gif2txt).
 
 DEMO
 ----
 
 ![](test.gif)
 
-HTML: 
+Example Output: 
 
-* http://hit9.github.io/gif2txt/out.html
-* http://hit9.github.io/gif2txt/withcolor.html
+* http://42iscool42.github.io/gif2txt/out.txt
 
 USAGE
 -----
 
 ```
-python gif2txt.py test.gif -m 80 -o out.html
-python gif2txt.py test.gif -m 80 -o withcolor.html -c
+python gif2txt.py test.gif -m 95 -o out.txt
 ```
 
 Requirements
 -----------
 
-* Jinja2
 * Pillow
 
 ```
