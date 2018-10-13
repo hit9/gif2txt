@@ -22,10 +22,10 @@ USAGE
 -----
 
 ```
-python gif2txt.py test.gif -m 80 -o out.html
-python gif2txt.py test.gif -m 80 -o withcolor.html -c
-python gif2txt.py pacman.gif -o pacman.html -c --green-screen-sensibility 128
-python gif2txt.py test.gif -r -o reversegreenscreen.html
+python gif2txt.py test.gif -m 80 -o examples/out.html
+python gif2txt.py test.gif -m 80 -o examples/withcolor.html -c
+python gif2txt.py pacman.gif -o examples/pacman.html -c --green-screen-sensibility 128
+python gif2txt.py test.gif -r -o examples/reversegreenscreen.html
 ```
 
 Requirements
