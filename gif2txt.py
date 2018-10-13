@@ -5,7 +5,7 @@ from PIL import Image
 from jinja2 import Template
 
 
-def gif2txt(filename, maxLen=80, output_file='out.html', with_color=False):
+def gif2txt(filename, maxLen=80, output_file='out.html', with_color=False, green_screen_sensibility=None):
     try:
         maxLen = int(maxLen)
     except:
@@ -36,9 +36,11 @@ def gif2txt(filename, maxLen=80, output_file='out.html', with_color=False):
             for h in range(height):
                 for w in range(width):
                     rgb = im.getpixel((w, h))
+                    if green_screen_sensibility and len([x for x in rgb
+                            if x < green_screen_sensibility]) == 3:
+                        rgb = (0, 255, 0)
                     if with_color:
-                        string += "<span style=\"color:rgb" + \
-                            str(rgb) + ";\">▇</span>"
+                        string += "<span style=\"color:rgb%s;\">▇</span>" % str(rgb)
                     else:
                         string += chs[int(sum(rgb) / 3.0 / 256.0 * 16)]
                 string += '\n'
@@ -70,6 +72,10 @@ def main():
     parser.add_argument('-c', '--color', action='store_true',
                         default=False,
                         help='With color')
+    parser.add_argument('-g', '--green-screen-sensibility',
+                        type=int, default=None,
+                        help='convert black and grey into green, '
+                             'sensibility between 1 and 255, suggested 128')
     args = parser.parse_args()
 
     if not args.maxLen:
@@ -80,7 +86,8 @@ def main():
     gif2txt(filename=args.filename,
             maxLen=args.maxLen,
             output_file=args.output,
-            with_color=args.color)
+            with_color=args.color,
+            green_screen_sensibility=args.green_screen_sensibility)
 
 if __name__ == '__main__':
     main()
